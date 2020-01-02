@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h2><b>{{user.first_name}}&nbsp;{{user.last_name}}</b></h2>
+	<form method='POST'>
+		{% csrf_token %}
+		<p>Are you Delete this student?</p> 
+		<input class='btn btn-success' type="submit" value="Yes">
+		<a type="button" class="btn btn-primary" href='/student/'>Back</a>
+	</form>
+{% endblock content %}

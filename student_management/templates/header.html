@@ -1,0 +1,39 @@
+{% load survey_extra %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Student Management</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'student_list' %}">{{ 'students'| capfirst }}</a>
+      </li>
+      <li class="nav-item">
+        <!-- <a class="nav-link" href="/survey/">{{ 'surveys'| upper:5 }} <span class='badge badge-primary badge-pill'>{{ survey_count }}</span></a> -->
+
+        <a class="nav-link" href="/survey/">{{ 'surveys'| capfirst }} <span class='badge badge-primary badge-pill'>{{ survey_count }}</span></a>
+      </li>      
+  </div>
+  <div class='text-right'>
+    <form method="POST" action="/logout/">
+      {% csrf_token %}
+        <a href="{% url 'my_profile' %}">
+          <span>{{ request.user.username | capfirst }}</span>
+        </a>
+
+        {% if request.user.username %}
+          <input type="submit" class='btn btn-outline-danger' value="Logout"> 
+ 
+        {% else %}
+
+          <button class='btn btn-outline-success'><a href='/login/' type='button'>Login</a></button>   
+          <button class='btn btn-outline-primary'><a href='/register/' type='button'>Signup</a></button>   
+
+        {% endif %}  
+    
+    </form> 
+  </div>
+</nav>

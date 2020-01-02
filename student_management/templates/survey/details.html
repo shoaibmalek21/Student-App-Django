@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p>
+        <h3>{{question.title}}</h3>
+    </p>
+    <div class="list-group col-md-6">
+    {% for choice in question.choices %}
+		<br>
+		<br>
+
+        <a class="list-group-item" href="{% url 'vote_survey' question.id %}">
+            <span class="badge badge-pill badge-primary float-right">{{choice.votes}}</span>
+            {{choice.text}}
+        </a>
+        <!-- <p> ({{choice.votes}})</p> -->
+        {% empty %}
+        <div class="list-group-item">There is no chice available for this question.</div>
+        {% endfor %}
+    </div>
+    <br>
+    <!-- <div class="col-md-12"><b>Created by: </b> {{question.created_by.first_name}}</div>
+    {% for choice in question.choices %}
+    	<a href="upvote/{{ question.id }}">up</a>
+	{% endfor %} -->
+{% endblock content %}
+
+<!-- 	<p><h2></h2></p>
+	<h3>{{ question.title }}</h3>
+	<h3>{{ choice.text }}</h3>
+	<div class='list-group col-md-6'>
+		<br>
+		<br>
+			
+			<div class='field_type'>
+		
+	{% for choice in question.choices %}
+		<div class="radio">
+			<label>
+				<input type='radio' name='choice' value='{{choice.id}}'>
+				{{choice.text}}  [{{choice.votes}}]
+			</label>
+		</div>
+		
+		 <p class='list-group-item'>{{choice.text}}  {{choice.votes}}</p>
+	{% empty %}
+		<p class='list-group-item'>There is no choice availabel for this question.</p>
+	{% endfor %}
+		<input class='btn btn-dark' type='button' value='Vote'/>
+
+	</div>
+
+	<p>Poll is created by {{question.created_by.first_name}}</p>
+ -->

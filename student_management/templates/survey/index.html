@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<tr>
+							<td>
+								<h3><b>List of {{title | capfirst}}</b></h3>
+							</td>
+							<td align='right'>			
+								<a href='/survey/add/'><button class="btn btn-success">Add survey</button></a>
+							</td>
+						</tr>				
+					</tr>
+					<tr>
+						<th>Name</th>
+						<th>Actions</th>
+					</tr>	
+				</thead>
+				<tbody class="table table-bordered">
+					<!-- <div class='table-responsive-sm'> -->
+					{% if questions %}
+						<tr class='list-group'>
+							{% for question in questions %}
+							<tr>
+								<td>
+									<a class='list-group-item' href='/survey/{{question.id}}/details/'>{{question.title}}</a>
+								</td>
+								
+								<td>
+									<a type="button" class="btn btn-info" href='/survey/{{question.id}}/details/'>Details</a>
+									<a type="button" class="btn btn-danger" href='/survey/{{question.id}}/delete/'>Delete</a>
+								</td>
+							</tr>
+							{% endfor %}
+						</tr>
+					{% else %}
+						<p>There's No Question Availabel.</p>
+					{% endif %}
+				</tbody>
+		</table>
+
+{% endblock content %}

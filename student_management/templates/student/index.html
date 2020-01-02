@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load survey_extra %}
+
+{% block content %}
+<div class='row'>
+	<div class='col-sm-8'>
+		<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<tr>
+							<td>
+								<h3><b>List of {{title}}</b></h3>
+							</td>
+							<td align='right'>
+								<a href='/student/add/'><button class="btn btn-success">Add students</button></a>
+							</td>
+						</tr>				
+					</tr>
+					<tr>
+						<th>Name</th>
+						<th>Actions</th>
+					</tr>	
+				</thead>
+				<tbody class="table table-bordered">
+					<!-- <div class='table-responsive-sm'> -->
+					{% if users %}
+						<tr class='list-group'>
+							{% for user in users %}
+							<tr>
+								<td><b>{{user.username}} &nbsp; {{user.email}}</b></td>
+								
+								<td>
+									<a type="button" class="btn btn-info" href='/student/{{user.id}}/details/'>Details</a>
+									<a type="button" class="btn btn-primary" href='/student/{{user.id}}/edit/'>Edit</a>
+									<a type="button" class="btn btn-danger" href='/student/{{user.id}}/details/'>Delete</a>
+								</td>
+							</tr>
+							{% endfor %}
+						</tr>
+					{% else %}
+						<p>There's No Question Availabel.</p>
+					{% endif %}
+					<!-- </div> -->
+				</tbody>
+			<!-- <div class='col-sm-4'>
+			</div> -->
+		</table>
+	</div>
+	<div class='col-sm-4'>	
+		{% recent_survey as questions %}		
+		<p>			
+			<h3><b>Recent Survey</b></h3>
+		</p>
+	
+		{% if questions %}
+			<div class="list-group">
+				{% for question in questions %}
+					<!-- <a class="list-group-item" href="{% url 'survey_details' question.id %}"></a> -->
+					<a class="list-group-item" href="/survey/{{question.id}}/details/">{{question.title}}</a>
+
+					<!-- {{question.title | capfirst}} -->
+				{% endfor %}
+			</div>
+		{% else %}
+				<p>There is no question available.</p>
+		{% endif %}
+	</div>
+</div>
+{% endblock content %}
